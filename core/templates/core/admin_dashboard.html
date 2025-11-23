@@ -1,0 +1,33 @@
+{% extends 'core/sidebar_base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Admin Complaint List</h2>
+
+<div class="card p-3 shadow">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th><th>Title</th><th>User</th><th>Status</th><th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for c in complaints %}
+            <tr>
+                <td>{{ c.id }}</td>
+                <td>{{ c.title }}</td>
+                <td>{{ c.user.username }}</td>
+                <td>{{ c.status }}</td>
+                <td>
+                    <a href="/update-status/{{ c.id }}/" class="btn btn-primary btn-sm">
+                        Change Status
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

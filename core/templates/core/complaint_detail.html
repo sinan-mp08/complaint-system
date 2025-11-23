@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% block title %}Complaint Details{% endblock %}
+
+{% block content %}
+<h2>{{ complaint.title }}</h2>
+
+<p><strong>Category:</strong> {{ complaint.category }}</p>
+<p><strong>Status:</strong> 
+    <span class="badge 
+        {% if complaint.status == 'Pending' %} bg-warning 
+        {% elif complaint.status == 'In Progress' %} bg-info
+        {% else %} bg-success {% endif %}">
+        {{ complaint.status }}
+    </span>
+</p>
+
+<p><strong>Description:</strong></p>
+<p>{{ complaint.description }}</p>
+
+{% if complaint.image %}
+    <p><strong>Attached Image:</strong></p>
+    <img src="{{ complaint.image.url }}" class="img-fluid rounded" style="max-height: 300px;">
+{% endif %}
+
+<p class="text-muted mt-3">Submitted on: {{ complaint.created_at|date:"M d, Y H:i" }}</p>
+
+<a href="/dashboard/" class="btn btn-secondary mt-3">Back</a>
+
+{% endblock %}

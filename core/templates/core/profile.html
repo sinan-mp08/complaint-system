@@ -1,0 +1,50 @@
+{% extends 'core/sidebar_base.html' %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">My Profile</h2>
+
+<div class="card p-4 shadow" style="max-width: 600px;">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="text-center mb-3">
+            {% if profile.photo %}
+                <img src="{{ profile.photo.url }}" class="rounded-circle" width="120" height="120">
+            {% else %}
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="rounded-circle" width="120" height="120">
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Profile Photo</label>
+            <input type="file" name="photo" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">First Name</label>
+            <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Last Name</label>
+            <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" value="{{ user.email }}" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input type="text" name="phone" value="{{ profile.phone }}" class="form-control">
+        </div>
+
+        <button class="btn btn-primary w-100">Save Changes</button>
+    </form>
+</div>
+
+<a href="/accounts/password_change/" class="btn btn-outline-dark mt-3">Change Password</a>
+
+{% endblock %}
